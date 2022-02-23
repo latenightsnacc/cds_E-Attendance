@@ -1,0 +1,19 @@
+const express = require('express');
+const sessions = require('express-session');
+const cors = require('cors');
+const mysql = require('mysql');
+const cookieParser = require('cookie-parser');
+const PORT = 4000;
+const app = express();
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: '',
+    saveUninitialized:true,
+    cookie: {maxAge: oneDay},
+    resave
+}))
+
+app( () => {
+    console.log('Server running on port 8080')
+} )
