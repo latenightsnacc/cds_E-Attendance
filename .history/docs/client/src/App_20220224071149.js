@@ -1,0 +1,15 @@
+import React from 'react';
+
+import PreLoader from './components/PreLoader'
+function App() {
+  <BrowserRouter>
+    <Switch>
+      <Route path={'/dashboard/member'} element={<MemberDashboard />} />
+      <Route path={'/login'} element={<LoginForm />} />
+      <Route path={'/register'} element={<RegisterForm />} />
+      <Route path={'/'} element={<PreLoader />} />
+    </Switch>
+  </BrowserRouter>
+}
+
+export default App;
