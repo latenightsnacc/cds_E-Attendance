@@ -10,7 +10,7 @@ const ProtectedRoute = ({isAuth: isAuth, component: Component, ...rest}) => {
                 return <Component />
             } else {
                 return(
-                    <Navigate to={ {pathname: "/", state:{from: props.location}}} />
+                    <Nato={ {pathname: "/", state:{from: props.location}}} />
                 )
             }
         }}

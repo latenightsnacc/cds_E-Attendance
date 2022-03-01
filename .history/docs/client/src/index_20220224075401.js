@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    
 
         {/* <Route path="/dashboard/member/attendance" element={<ViewAttendance />} />
         <Route path="/dashboard/member/dues" element={<ViewDues />} />
@@ -35,7 +35,8 @@ ReactDOM.render(
         <Route path="/dashboard/treasurer/newcollection" element={<NewCollection />} />
         <Route path="/dashboard/president" element={<President />} />
         <Route path="/dashboard/coordinator" element={<Coordinator />} /> */}
-     
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

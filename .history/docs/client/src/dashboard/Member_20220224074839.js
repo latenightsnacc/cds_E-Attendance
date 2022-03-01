@@ -1,6 +1,6 @@
 // import {useState, useEffect} from "react";
 // import Axios from "axios";
-import withRouter from "../routes/withRouter";
+import { with}
 import MemberMenu from "../components/MemberMenu";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -86,4 +86,4 @@ const Member = () => {
     )
 }
 
-export default withRouter(Member);
+export default Member;

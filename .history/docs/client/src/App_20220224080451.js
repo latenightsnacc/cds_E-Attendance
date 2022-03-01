@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        {/* <Route path="/profilecreated" element={<ProfileCreated />} /> */}
         <Route path="/login" element={<LoginForm />} />
         <ProtectedRoute path="/dashboard/member" component={<MemberDashboard />} isAuth={isAuth} />
       </Routes>

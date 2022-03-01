@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    
 
         {/* <Route path="/dashboard/member/attendance" element={<ViewAttendance />} />
         <Route path="/dashboard/member/dues" element={<ViewDues />} />

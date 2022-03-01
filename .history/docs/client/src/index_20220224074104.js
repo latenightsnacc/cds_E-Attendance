@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import 
+import MemberDashboard from './dashboard/Member'
+import LoginForm from './Login'
+import RegisterForm from './Register'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/register" element={<RegisterForm />} />
+        {/* <Route path="/profilecreated" element={<ProfileCreated />} /> */}
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/dashboard/member" element={<MemberDashboard />} />
 
         {/* <Route path="/dashboard/member/attendance" element={<ViewAttendance />} />
         <Route path="/dashboard/member/dues" element={<ViewDues />} />
@@ -35,7 +45,8 @@ ReactDOM.render(
         <Route path="/dashboard/treasurer/newcollection" element={<NewCollection />} />
         <Route path="/dashboard/president" element={<President />} />
         <Route path="/dashboard/coordinator" element={<Coordinator />} /> */}
-     
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

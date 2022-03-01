@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Navigate } from "react-router-dom";
+import { Route, Na } from "react-router-dom";
 
 const ProtectedRoute = ({isAuth: isAuth, component: Component, ...rest}) => {
     return(
@@ -10,7 +10,7 @@ const ProtectedRoute = ({isAuth: isAuth, component: Component, ...rest}) => {
                 return <Component />
             } else {
                 return(
-                    <Navigate to={ {pathname: "/", state:{from: props.location}}} />
+                    <Redirect to={ {pathname: "/", state:{from: props.location}}} />
                 )
             }
         }}
