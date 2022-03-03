@@ -1,0 +1,2 @@
+const db = require("../models");
+const Corper = db.c
