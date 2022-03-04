@@ -1,5 +1,5 @@
 require("dotenv").config();
-const p4ssw0rd = require('p4ssw0rd');
+import * as p4ssw0rd from 'p4ssw0rd';
 const express = require("express");
 let session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -8,7 +8,9 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const db = require("./models/");
 let mysqlStore = require('connect-session-sequelize')(session.Store);
+const bcrypt = require("bcryptjs");
 const { sequelize } = require("./models/");
+const Corper = require("./controllers/corper.controller")
 const app = express();
 const PORT = process.env.PORT;
 const ONE_DAY = 24*60*60*1000;
@@ -99,29 +101,28 @@ app.post("/api/auth/signin", async (req,res) => {
 
     const email = req.body.email;
     const password = req.body.password;
-    console.log(password);
     if(email.length > 0){
         corper = dbConnect.query(`SELECT * FROM corpers WHERE email = ? `,email, (err,result) => {
             if(err) {
                 console.log(err)
             } else {
-                // res.send(result);
+                res.send(result);
                 console.log(result);
             }
         });
         console.log(corper);
         if(corper){
-            const passwordIsValid = p4ssw0rd.hash(password);
-            if(passwordIsValid === corper.password) {
+            const passwordIsValid = p4ssw0rd.check(password, corper.password);
+            if(p4ssw0rd.check(password, corper.password)) {
                 session=req.session;
                 session.userId=corper.id;
                 res.send(`/api/dashboard/member/${session.userId}`);
                 console.log("Logged in");
-                
-            } else {
                 return res.status(401).send({
                     message: "Invalid Password!"
-                });  
+                });
+            } else {
+                    
             }
     
         } else {

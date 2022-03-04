@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
                     console.log(response);
                     url = response.data;
                 }
-                <Navigate to={'/'} /> 
+                <Navigate /> 
             }).catch(e => {
                 console.log(e);
             })

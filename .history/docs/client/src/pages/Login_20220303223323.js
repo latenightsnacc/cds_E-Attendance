@@ -38,10 +38,13 @@ const Login = () => {
   const handleLogin = () => {
     setLoading(true);
     try{
-      login().then(() => {
+      login().then((response) => {
+        if(response){
+            console.log(response);
+            url = response.data;
+        } 
+        navigate(state?.path || url);
         setLoading(false);
-        // navigate(state?.path || url);
-        
         
       })
     }catch(e) {
@@ -100,7 +103,7 @@ const Login = () => {
                 
                 <div className="flex w-full flex-col">
                   
-                  <button onClick={handleLogin} className="bg-transparent hover:bg-transparent text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={loading} >
+                  <button onClick={handleLogin} className="bg-transparent hover:bg-tra text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={loading} >
                     {loading && <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>}
                     Login
                   </button>

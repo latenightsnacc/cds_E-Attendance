@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import Axios from 'axios';
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {details} from '../pages/Login';
 
 const AuthContext = createContext(null);
@@ -34,10 +34,7 @@ const AuthProvider = ({ children }) => {
                 if(response){
                     console.log(response);
                     url = response.data;
-                }
-                <Navigate to={'/'} /> 
-            }).catch(e => {
-                console.log(e);
+                } 
             })
         }catch(e){
             console.log(e);

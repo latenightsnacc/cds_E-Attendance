@@ -1,5 +1,4 @@
 require("dotenv").config();
-const p4ssw0rd = require('p4ssw0rd');
 const express = require("express");
 let session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -8,7 +7,9 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const db = require("./models/");
 let mysqlStore = require('connect-session-sequelize')(session.Store);
+const bcrypt = require("bcryptjs");
 const { sequelize } = require("./models/");
+const Corper = require("./controllers/corper.controller")
 const app = express();
 const PORT = process.env.PORT;
 const ONE_DAY = 24*60*60*1000;
@@ -24,7 +25,13 @@ const dbConnect = mysql.createConnection({
     password: dbConfig.PASSWORD,
     database: dbConfig.DB
 });
-
+const options = {
+    connectionLimit: 10,
+    user: dbConfig.USER,
+    host: dbConfig.HOST,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB
+}
 // const pool = mysql.createPool(options);
 dbConnect.connect(err => {
     if(err) {
@@ -50,6 +57,7 @@ app.use(session({
     }
 }))
 
+let corperSession;
 app.get("/", (req,res) => {
     res.json({
         message: "Welcome to NYSC CDS E-ATTENDANCE BUILT BY DEBTHEBUILDER"
@@ -77,7 +85,7 @@ app.post("/api/auth/signup", (req, res) => {
         email: req.body.email,
         phoneNo: req.body.phoneNo,
         profilePic: req.body.profilePic,
-        password: p4ssw0rd.hash(req.body.statecode),
+        password: bcrypt.hashSync(req.body.statecode, 8),
         status: req.body.status,
         roles: req.body.roles,
         state: req.body.state 
@@ -99,29 +107,27 @@ app.post("/api/auth/signin", async (req,res) => {
 
     const email = req.body.email;
     const password = req.body.password;
-    console.log(password);
     if(email.length > 0){
         corper = dbConnect.query(`SELECT * FROM corpers WHERE email = ? `,email, (err,result) => {
             if(err) {
                 console.log(err)
             } else {
-                // res.send(result);
+                res.send(result);
                 console.log(result);
             }
         });
         console.log(corper);
         if(corper){
-            const passwordIsValid = p4ssw0rd.hash(password);
-            if(passwordIsValid === corper.password) {
+            const passwordIsValid = bcrypt.compareSync(password, corper.password);
+            if(!passwordIsValid) {
+                return res.status(401).send({
+                    message: "Invalid Password!"
+                });
+            } else {
                 session=req.session;
                 session.userId=corper.id;
                 res.send(`/api/dashboard/member/${session.userId}`);
-                console.log("Logged in");
-                
-            } else {
-                return res.status(401).send({
-                    message: "Invalid Password!"
-                });  
+                console.log("Logged in");    
             }
     
         } else {

@@ -9,6 +9,7 @@ const cors = require("cors");
 const db = require("./models/");
 let mysqlStore = require('connect-session-sequelize')(session.Store);
 const { sequelize } = require("./models/");
+const Corper = require("./controllers/corper.controller")
 const app = express();
 const PORT = process.env.PORT;
 const ONE_DAY = 24*60*60*1000;
@@ -105,7 +106,7 @@ app.post("/api/auth/signin", async (req,res) => {
             if(err) {
                 console.log(err)
             } else {
-                // res.send(result);
+                res.send(result);
                 console.log(result);
             }
         });

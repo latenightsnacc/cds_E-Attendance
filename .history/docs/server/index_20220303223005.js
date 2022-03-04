@@ -105,7 +105,7 @@ app.post("/api/auth/signin", async (req,res) => {
             if(err) {
                 console.log(err)
             } else {
-                // res.send(result);
+                res.send(result);
                 console.log(result);
             }
         });

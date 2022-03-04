@@ -38,8 +38,8 @@ const Login = () => {
   const handleLogin = () => {
     setLoading(true);
     try{
-      login().then(() => {
-        setLoading(false);
+      login().then((response) => {
+        
         // navigate(state?.path || url);
         
         

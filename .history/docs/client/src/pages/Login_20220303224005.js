@@ -38,7 +38,7 @@ const Login = () => {
   const handleLogin = () => {
     setLoading(true);
     try{
-      login().then(() => {
+      login().then((response) => {
         setLoading(false);
         // navigate(state?.path || url);
         
