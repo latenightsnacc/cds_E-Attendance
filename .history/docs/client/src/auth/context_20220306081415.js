@@ -1,0 +1,23 @@
+import { createContext, useState, useEffect} from 'react';
+import Axios from 'axios';
+import { details } from '../pages/Login';
+
+export const AuthContext = createContext({
+    user: {},
+    auth: false
+});
+
+const AuthProvider = ({children}) => {
+    const [user, setUser ] = useState({
+        user: {},
+        auth: false
+    });
+        
+    return(
+        <AuthContext.Provider value={{user, setUser}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}
+
+export default AuthProvider;
