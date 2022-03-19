@@ -65,7 +65,7 @@ const reducer = async (state, action) => {
             throw new Error();
            
     }
-    return state;
+    return state
 }
 
 export const UserContext = createContext({

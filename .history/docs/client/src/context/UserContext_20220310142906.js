@@ -35,14 +35,14 @@ const reducer = async (state, action) => {
                         
                 }
                
-            
+            return state
             } catch(e) {
                 console.log(e);
                 return {
                     ...state,
                     errorMessage: state.errorMessage = e}
             }
-        break;
+           
         case 'LOGIN_SUCCESSFUL':
             if(res.status === 200) {
                 return {
@@ -63,9 +63,7 @@ const reducer = async (state, action) => {
             }
         default:
             throw new Error();
-           
     }
-    return state;
 }
 
 export const UserContext = createContext({

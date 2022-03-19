@@ -16,7 +16,8 @@ const initialState = {
 
 let res;
 
-const reducer = async (state, action) => {
+const reducer = async (state = initialState, action) => {
+    
     
     switch (action.type) {
         case 'REQUEST_LOGIN':
@@ -28,21 +29,21 @@ const reducer = async (state, action) => {
                 })
                 if(res.status === 200) {
                     return {
-                        ...state,
+                        state.userDetails = res.data
                         userDetails: state.userDetails = res.data,
                         auth: state.auth = true,
                     }
                         
                 }
-               
-            
+               console.log(state.userDetails)
+            return state
             } catch(e) {
                 console.log(e);
                 return {
                     ...state,
                     errorMessage: state.errorMessage = e}
             }
-        break;
+           
         case 'LOGIN_SUCCESSFUL':
             if(res.status === 200) {
                 return {
@@ -63,9 +64,7 @@ const reducer = async (state, action) => {
             }
         default:
             throw new Error();
-           
     }
-    return state;
 }
 
 export const UserContext = createContext({
